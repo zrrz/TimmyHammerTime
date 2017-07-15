@@ -1,33 +1,21 @@
 fileFormatVersion: 2
-guid: 165d3a99b1c553f45944e030adfcccc0
-timeCreated: 1500094711
+guid: b0c390904a038154fae426b153acdaa6
+timeCreated: 1500101900
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CrystalsGrey_0
-    21300002: CrystalsGrey_1
-    21300004: CrystalsGrey_2
-    21300006: CrystalsGrey_3
-    21300008: CrystalsGrey_4
-    21300010: CrystalsGrey_5
-    21300012: CrystalsGrey_6
-    21300014: CrystalsGrey_7
-    21300016: CrystalsGrey_8
-    21300018: CrystalsGrey_9
-    21300020: CrystalsGrey_10
-    21300022: CrystalsGrey_11
-    21300024: Crystals_0
-    21300026: Crystals_1
-    21300028: Crystals_2
-    21300030: Crystals_3
-    21300032: Crystals_4
-    21300034: Crystals_5
-    21300036: Crystals_6
-    21300038: Crystals_7
-    21300040: Crystals_8
-    21300042: Crystals_9
-    21300044: Crystals_10
-    21300046: Crystals_11
+    21300000: TileSet_0
+    21300002: TileSet_1
+    21300004: TileSet_2
+    21300006: TileSet_3
+    21300008: TileSet_4
+    21300010: TileSet_5
+    21300012: TestTileSet_0
+    21300014: TestTileSet_1
+    21300016: TestTileSet_2
+    21300018: TestTileSet_3
+    21300020: TestTileSet_4
+    21300022: TestTileSet_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -107,91 +95,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crystals_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crystals_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crystals_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crystals_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crystals_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crystals_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crystals_6
+      name: TestTileSet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -205,7 +109,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crystals_7
+      name: TestTileSet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -219,7 +123,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crystals_8
+      name: TestTileSet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -233,7 +137,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crystals_9
+      name: TestTileSet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -247,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crystals_10
+      name: TestTileSet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -261,7 +165,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crystals_11
+      name: TestTileSet_5
       rect:
         serializedVersion: 2
         x: 160
