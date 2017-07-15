@@ -18,12 +18,19 @@ public class HumanCharacterController : MonoBehaviour {
 	private CharacterController2D _controller;
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
+	[SerializeField]
 	private Vector3 _velocity;
 
+	public Vector2 attackVelocity;
+
+	[System.NonSerialized]
+	public bool attacking = false;
+
+	public ParticleSystem smashParticles;
 
 	void Awake()
 	{
-		_animator = GetComponent<Animator>();
+		_animator = GetComponentInChildren<Animator>();
 		_controller = GetComponent<CharacterController2D>();
 
 		// listen to some events for illustration purposes
@@ -63,38 +70,46 @@ public class HumanCharacterController : MonoBehaviour {
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
-		if( _controller.isGrounded )
-			_velocity.y = 0;
+//		if( _controller.isGrounded ) {
+//			_velocity.y = 0;
+//		}
 
+		if(!attacking) {
+			if( _controller.isGrounded ) {
+				Debug.DrawRay(transform.position, Vector3.up, Color.green, 0.5f);
+				bool melee = InputController.input.Melee.WasPressed;
+				Vector3	moveDir = InputController.input.Move;
 
-		bool melee = InputController.input.Melee.WasPressed;
-		Vector3	moveDir = InputController.input.Move;
+				if(melee) {
+					_animator.Play( Animator.StringToHash( "Attack" ) );
+				}
 
+				if( moveDir.x > 0f )
+				{
+					normalizedHorizontalSpeed = 1;
+					if( transform.localScale.x < 0f )
+						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
-		if( moveDir.x > 0f )
-		{
-			normalizedHorizontalSpeed = 1;
-			if( transform.localScale.x < 0f )
-				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+					if( _controller.isGrounded )
+						_animator.Play( Animator.StringToHash( "Walk" ) );
+				}
+				else if( moveDir.x < 0f )
+				{
+					normalizedHorizontalSpeed = -1;
+					if( transform.localScale.x > 0f )
+						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Walk" ) );
-		}
-		else if( moveDir.x < 0f )
-		{
-			normalizedHorizontalSpeed = -1;
-			if( transform.localScale.x > 0f )
-				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+					if( _controller.isGrounded )
+						_animator.Play( Animator.StringToHash( "Walk" ) );
+				}
+				else
+				{
+					normalizedHorizontalSpeed = 0;
 
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Walk" ) );
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0;
-
-			if( _controller.isGrounded )
-				_animator.Play( Animator.StringToHash( "Idle" ) );
+					if( _controller.isGrounded )
+						_animator.Play( Animator.StringToHash( "Idle" ) );
+				}
+			}
 		}
 
 
@@ -109,6 +124,8 @@ public class HumanCharacterController : MonoBehaviour {
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
 		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
 		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
+//		if(_velocity.x < 0.03f)
+//			_velocity.x = 0f;
 
 		// apply gravity before moving
 		_velocity.y += gravity * Time.deltaTime;
@@ -125,6 +142,13 @@ public class HumanCharacterController : MonoBehaviour {
 
 		// grab our current _velocity to use as a base for all calculations
 		_velocity = _controller.velocity;
+	}
+
+	public void Launch() {
+		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
+		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f);
+//		smashParticles.Play(true);
+//		attacking = false;
 	}
 
 }
