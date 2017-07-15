@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b641dbdd2c227654c88a0aad5cd1db68
-timeCreated: 1500091459
+timeCreated: 1500092735
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,7 +64,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -73,7 +73,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,12 +94,12 @@ TextureImporter:
       name: TimmyWalk (2)_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 20
         y: 0
-        width: 64
-        height: 64
+        width: 42
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -108,12 +108,12 @@ TextureImporter:
       name: TimmyWalk (2)_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 84
         y: 0
-        width: 64
-        height: 64
+        width: 42
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -122,12 +122,12 @@ TextureImporter:
       name: TimmyWalk (2)_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 148
         y: 0
-        width: 64
-        height: 64
+        width: 42
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -136,12 +136,12 @@ TextureImporter:
       name: TimmyWalk (2)_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 212
         y: 0
-        width: 64
-        height: 64
+        width: 42
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
