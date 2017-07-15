@@ -57,7 +57,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -91,7 +91,7 @@ MonoBehaviour:
   thumbnail: {fileID: 21300042, guid: 165d3a99b1c553f45944e030adfcccc0, type: 3}
   hideInHierarchy: 0
   tileA:
-  - {fileID: 21300030, guid: 165d3a99b1c553f45944e030adfcccc0, type: 3}
+  - {fileID: 21300042, guid: 165d3a99b1c553f45944e030adfcccc0, type: 3}
   tileC: []
   tileCE: []
   tileCN: []
