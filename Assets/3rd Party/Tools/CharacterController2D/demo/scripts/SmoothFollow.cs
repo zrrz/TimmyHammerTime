@@ -18,8 +18,8 @@ public class SmoothFollow : MonoBehaviour
 	
 	void Awake()
 	{
-		transform.parent = null;
 		transform = gameObject.transform;
+		transform.parent = null;
 		_playerController = target.GetComponent<CharacterController2D>();
 	}
 	

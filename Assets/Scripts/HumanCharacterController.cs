@@ -75,41 +75,47 @@ public class HumanCharacterController : MonoBehaviour {
 //		}
 
 		if(!attacking) {
-			if( _controller.isGrounded ) {
-				Debug.DrawRay(transform.position, Vector3.up, Color.green, 0.5f);
-				bool melee = InputController.input.Melee.WasPressed;
-				Vector3	moveDir = InputController.input.Move;
+//			if( _controller.isGrounded ) {
+			Debug.DrawRay(transform.position, Vector3.up, Color.green, 0.5f);
+			bool melee = InputController.input.Melee.WasPressed;
+			Vector3	moveDir = InputController.input.Move;
 
-				if(melee) {
-					_animator.Play( Animator.StringToHash( "Attack" ) );
-				}
+			if(melee &&  _controller.isGrounded) {
+				_animator.Play( Animator.StringToHash( "Attack" ) );
+			}
 
-				if( moveDir.x > 0f )
-				{
-					normalizedHorizontalSpeed = 1;
+			if( moveDir.x > 0f )
+			{
+				normalizedHorizontalSpeed = 1;
+//				if( transform.localScale.x < 0f )
+//					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+
+				if( _controller.isGrounded ) {
+					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x < 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
-
-					if( _controller.isGrounded )
-						_animator.Play( Animator.StringToHash( "Walk" ) );
-				}
-				else if( moveDir.x < 0f )
-				{
-					normalizedHorizontalSpeed = -1;
-					if( transform.localScale.x > 0f )
-						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
-
-					if( _controller.isGrounded )
-						_animator.Play( Animator.StringToHash( "Walk" ) );
-				}
-				else
-				{
-					normalizedHorizontalSpeed = 0;
-
-					if( _controller.isGrounded )
-						_animator.Play( Animator.StringToHash( "Idle" ) );
 				}
 			}
+			else if( moveDir.x < 0f )
+			{
+				normalizedHorizontalSpeed = -1;
+//				if( transform.localScale.x > 0f )
+//					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+
+				if( _controller.isGrounded ) {
+					_animator.Play( Animator.StringToHash( "Walk" ) );
+					if( transform.localScale.x > 0f )
+						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
+				}
+			}
+			else if( _controller.isGrounded )
+			{
+				normalizedHorizontalSpeed = 0;
+
+//					if( _controller.isGrounded )
+					_animator.Play( Animator.StringToHash( "Idle" ) );
+			}
+//			}
 		}
 
 

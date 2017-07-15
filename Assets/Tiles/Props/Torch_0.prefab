@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4695327990065320}
   - component: {fileID: 212107481623003032}
   - component: {fileID: 114777204404249422}
-  - component: {fileID: 111412345103548918}
+  - component: {fileID: 114070638554858402}
   m_Layer: 0
   m_Name: Torch_0
   m_TagString: Untagged
@@ -35,27 +35,30 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998548549308758}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111412345103548918
-Animation:
+--- !u!114 &114070638554858402
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998548549308758}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 0e1449702bf26184f8f87bf027ff1eee, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10d66f1387a6e94f8bbee140787660a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animateAllVariations: 1
+  animateLimitedVariations: []
+  speed: 0.1
+  randomStart: 1
+  loop: 1
+  autoStart: 1
 --- !u!114 &114777204404249422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,20 +70,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3deeb3c20d031a44af9ec61c1c9dcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileTexture: {fileID: 0}
-  tileName: 
-  tileType: 
+  tileTexture: {fileID: 2800000, guid: 90de42ca6f03a1643bc13eebc219fab3, type: 3}
+  tileName: Torch
+  tileType: Prop
   tileSize: 1
   passive: 0
   disableColliderOnAwake: 0
   particles: {fileID: 0}
   attachments: []
   currentAttachment: {fileID: 0}
-  tileSprite: 
-  thumbnail: {fileID: 0}
+  tileSprite: A
+  thumbnail: {fileID: 21300000, guid: 90de42ca6f03a1643bc13eebc219fab3, type: 3}
   hideInHierarchy: 0
   tileA:
   - {fileID: 21300000, guid: 90de42ca6f03a1643bc13eebc219fab3, type: 3}
+  - {fileID: 21300002, guid: 90de42ca6f03a1643bc13eebc219fab3, type: 3}
+  - {fileID: 21300004, guid: 90de42ca6f03a1643bc13eebc219fab3, type: 3}
   tileC: []
   tileCE: []
   tileCN: []
@@ -135,9 +140,9 @@ MonoBehaviour:
   neTile: {fileID: 0}
   seTile: {fileID: 0}
   swTile: {fileID: 0}
-  cacheRenderer: {fileID: 0}
+  cacheRenderer: {fileID: 212107481623003032}
   cacheCollider: {fileID: 0}
-  sortingOrder: 0
+  sortingOrder: 267
   tiles: []
 --- !u!212 &212107481623003032
 SpriteRenderer:
@@ -170,7 +175,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -29733
   m_Sprite: {fileID: 21300000, guid: 90de42ca6f03a1643bc13eebc219fab3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

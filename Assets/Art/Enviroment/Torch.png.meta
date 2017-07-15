@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 90de42ca6f03a1643bc13eebc219fab3
-timeCreated: 1500156035
+timeCreated: 1500159296
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -93,12 +93,12 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
     - serializedVersion: 2
       name: Torch_1
       rect:
@@ -107,12 +107,12 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
     - serializedVersion: 2
       name: Torch_2
       rect:
@@ -121,12 +121,12 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
+      alignment: 9
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
     outline: []
     physicsShape: []
   spritePackingTag: 
