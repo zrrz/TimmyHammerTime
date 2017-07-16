@@ -514,7 +514,7 @@ MonoBehaviour:
   gravity: -25
   runSpeed: 2
   groundDamping: 20
-  inAirDamping: 0
+  inAirDamping: 1
   jumpHeight: 3
   normalizedHorizontalSpeed: 0
   _velocity: {x: 0, y: 0, z: 0}
@@ -524,6 +524,10 @@ MonoBehaviour:
   hammerSounds: {fileID: 0}
   swingSound: {fileID: 0}
   launchSound: {fileID: 0}
+  dragSound: {fileID: 0}
+  playerSounds: {fileID: 0}
+  jumpSound: {fileID: 0}
+  walkSound: {fileID: 0}
 --- !u!124 &124871706696120042
 Behaviour:
   m_ObjectHideFlags: 1
