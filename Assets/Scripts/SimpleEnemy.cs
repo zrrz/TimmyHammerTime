@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Prime31;
 
-public class HumanCharacterController : MonoBehaviour {
+public class SimpleEnemy : MonoBehaviour {
 
 	// movement config
 	public float gravity = -25f;
@@ -12,7 +12,7 @@ public class HumanCharacterController : MonoBehaviour {
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
 
-	[SerializeField]
+	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 
 	private CharacterController2D _controller;
@@ -23,14 +23,12 @@ public class HumanCharacterController : MonoBehaviour {
 
 	public Vector2 attackVelocity;
 
-	[System.NonSerialized]
-	public bool attacking = false;
+	float direction = 1f;
 
-	public ParticleSystem smashParticles;
+//	[System.NonSerialized]
+//	public bool attacking = false;
 
-	public AudioSource hammerSounds;
-	public string swingSound;
-	public string launchSound;
+//	public ParticleSystem smashParticles;
 
 	void Awake()
 	{
@@ -41,6 +39,8 @@ public class HumanCharacterController : MonoBehaviour {
 		_controller.onControllerCollidedEvent += onControllerCollider;
 		_controller.onTriggerEnterEvent += onTriggerEnterEvent;
 		_controller.onTriggerExitEvent += onTriggerExitEvent;
+
+		direction = transform.localScale.x;
 	}
 
 
@@ -51,6 +51,9 @@ public class HumanCharacterController : MonoBehaviour {
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
 			return;
+
+		if(Mathf.Abs(hit.normal.x) == 1f)
+			direction *= -1f;
 
 		// logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
 		//Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
@@ -74,21 +77,25 @@ public class HumanCharacterController : MonoBehaviour {
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+		//		if( _controller.isGrounded ) {
+		//			_velocity.y = 0;
+		//		}
 		transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = false; //Eh. Not efficient.
 
-		if(!attacking) {
-//			if( _controller.isGrounded ) {
-			bool melee = InputController.input.Melee.WasPressed;
-			Vector3	moveDir = InputController.input.Move;
+//		if(!attacking) {
+			//			if( _controller.isGrounded ) {
+//			bool melee = InputController.input.Melee.WasPressed;
+		Vector3	moveDir =  transform.right * direction;// InputController.input.Move;
 
-			if(melee &&  _controller.isGrounded) {
-				_animator.Play( Animator.StringToHash( "Attack" ) );
-				hammerSounds.Play(swingSound);
-			}
+//			if(melee &&  _controller.isGrounded) {
+//				_animator.Play( Animator.StringToHash( "Attack" ) );
+//			}
 
 			if( moveDir.x > 0f )
 			{
 				normalizedHorizontalSpeed = 1;
+				//				if( transform.localScale.x < 0f )
+				//					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 				if( _controller.isGrounded ) {
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
@@ -100,6 +107,8 @@ public class HumanCharacterController : MonoBehaviour {
 			else if( moveDir.x < 0f )
 			{
 				normalizedHorizontalSpeed = -1;
+				//				if( transform.localScale.x > 0f )
+				//					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 				if( _controller.isGrounded ) {
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
@@ -112,39 +121,42 @@ public class HumanCharacterController : MonoBehaviour {
 			{
 				normalizedHorizontalSpeed = 0;
 
-//					if( _controller.isGrounded )
-					_animator.Play( Animator.StringToHash( "Idle" ) );
+				//					if( _controller.isGrounded )
+				_animator.Play( Animator.StringToHash( "Idle" ) );
 			}
-		}
-
-
-//		// we can only jump whilst grounded
-//		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
-//		{
-//			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-//			_animator.Play( Animator.StringToHash( "Jump" ) );
+			//			}
 //		}
 
-		if( _controller.isGrounded )
-		{
 
-		}
+		//		// we can only jump whilst grounded
+		//		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
+		//		{
+		//			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
+		//			_animator.Play( Animator.StringToHash( "Jump" ) );
+		//		}
+
+//		if( _controller.isGrounded ) //something with velocity here?
+//		{
+//
+//		}
 
 
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
 		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
 		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
+		//		if(_velocity.x < 0.03f)
+		//			_velocity.x = 0f;
 
 		// apply gravity before moving
 		_velocity.y += gravity * Time.deltaTime;
 
 		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
 		// this lets us jump down through one way platforms
-//		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
-//		{
-//			_velocity.y *= 3f;
-//			_controller.ignoreOneWayPlatformsThisFrame = true;
-//		}
+		//		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
+		//		{
+		//			_velocity.y *= 3f;
+		//			_controller.ignoreOneWayPlatformsThisFrame = true;
+		//		}
 
 		_controller.move( _velocity * Time.deltaTime );
 
@@ -152,20 +164,19 @@ public class HumanCharacterController : MonoBehaviour {
 		_velocity = _controller.velocity;
 	}
 
-	public void Launch() {
-		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.Find("SmashPosition").position, 1f);
-		for(int i = 0; i < cols.Length; i++) {
-			if(cols[i].GetComponent<CrystalDevice>() != null) {
-				cols[i].GetComponent<CrystalDevice>().Smash();
-			}
-		}
-
-		hammerSounds.Play(launchSound);
-
-		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
-		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
-//		smashParticles.Play(true);
-//		attacking = false;
-	}
+//	public void Launch() {
+//		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.Find("SmashPosition").position, 1f);
+//		for(int i = 0; i < cols.Length; i++) {
+//			if(cols[i].GetComponent<CrystalDevice>() != null) {
+//				cols[i].GetComponent<CrystalDevice>().Smash();
+//			}
+//		}
+//
+//
+//		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
+//		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
+//		//		smashParticles.Play(true);
+//		//		attacking = false;
+//	}
 
 }
