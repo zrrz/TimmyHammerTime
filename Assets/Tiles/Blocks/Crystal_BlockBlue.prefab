@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212454004364211034}
   - component: {fileID: 114010463416844648}
   - component: {fileID: 61086486832216884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Crystal_BlockBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
