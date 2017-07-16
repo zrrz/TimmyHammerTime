@@ -137,7 +137,7 @@ public class CharacterController2D : MonoBehaviour
 	[HideInInspector][NonSerialized]
 	public new Transform transform;
 	[HideInInspector][NonSerialized]
-	public CapsuleCollider2D boxCollider;
+	public BoxCollider2D boxCollider;
 	[HideInInspector][NonSerialized]
 	public Rigidbody2D rigidBody2D;
 
@@ -186,7 +186,7 @@ public class CharacterController2D : MonoBehaviour
 
 		// cache some components
 		transform = GetComponent<Transform>();
-		boxCollider = GetComponent<CapsuleCollider2D>();
+		boxCollider = GetComponent<BoxCollider2D>();
 		rigidBody2D = GetComponent<Rigidbody2D>();
 
 		// here, we trigger our properties that have setters with bodies
@@ -200,7 +200,6 @@ public class CharacterController2D : MonoBehaviour
 				Physics2D.IgnoreLayerCollision( gameObject.layer, i );
 		}
 	}
-
 
 	public void OnTriggerEnter2D( Collider2D col )
 	{
