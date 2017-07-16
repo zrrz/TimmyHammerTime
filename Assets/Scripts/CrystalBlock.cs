@@ -14,7 +14,7 @@ public class CrystalBlock : MonoBehaviour {
 	AudioSource audioSource;
 
 	void Start() {
-		audioSource = GetComponent<AudioSource>();
+		audioSource = gameObject.AddComponent<AudioSource>();
 	}
 
 	public void Break(float delay = 0f) {

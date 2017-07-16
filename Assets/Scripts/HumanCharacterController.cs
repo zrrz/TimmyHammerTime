@@ -30,21 +30,25 @@ public class HumanCharacterController : MonoBehaviour {
 
 	[Header("Sounds")]
 	[Space]
-	public AudioSource hammerSounds;
+	AudioSource hammerSounds;
 	public AudioClip swingSound;
 	public AudioClip launchSound;
 
 	[Space]
-	public AudioSource playerSounds;
+	AudioSource playerSounds;
 	public AudioClip jumpSound;
 	public AudioClip walkSound;
 
 	[Space]
-	public AudioSource altPlayerSounds;
+	AudioSource altPlayerSounds;
 	public AudioClip dragSound;
 
 	void Awake()
 	{
+		hammerSounds = gameObject.AddComponent<AudioSource>();
+		playerSounds = gameObject.AddComponent<AudioSource>();
+		altPlayerSounds = gameObject.AddComponent<AudioSource>();
+
 		_animator = GetComponentInChildren<Animator>();
 		_controller = GetComponent<CharacterController2D>();
 
