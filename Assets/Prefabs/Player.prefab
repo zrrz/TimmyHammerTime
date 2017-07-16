@@ -516,10 +516,14 @@ MonoBehaviour:
   groundDamping: 20
   inAirDamping: 0
   jumpHeight: 3
+  normalizedHorizontalSpeed: 0
   _velocity: {x: 0, y: 0, z: 0}
   attackVelocity: {x: 7, y: 11}
   smashParticles: {fileID: 198712109552307666, guid: f8bd1ed669d4a4c4994a5f6977a267ec,
     type: 2}
+  hammerSounds: {fileID: 0}
+  swingSound: {fileID: 0}
+  launchSound: {fileID: 0}
 --- !u!124 &124871706696120042
 Behaviour:
   m_ObjectHideFlags: 1

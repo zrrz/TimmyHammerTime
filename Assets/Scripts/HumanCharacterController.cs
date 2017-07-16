@@ -31,6 +31,11 @@ public class HumanCharacterController : MonoBehaviour {
 	public AudioSource hammerSounds;
 	public AudioClip swingSound;
 	public AudioClip launchSound;
+	public AudioClip dragSound;
+
+	public AudioSource playerSounds;
+	public AudioClip jumpSound;
+	public AudioClip walkSound;
 
 	void Awake()
 	{
@@ -92,6 +97,15 @@ public class HumanCharacterController : MonoBehaviour {
 				normalizedHorizontalSpeed = 1;
 
 				if( _controller.isGrounded ) {
+					if(playerSounds.clip != walkSound || !playerSounds.isPlaying) {
+						playerSounds.clip = walkSound;
+						playerSounds.Play();
+					}
+					if(hammerSounds.clip != dragSound || !hammerSounds.isPlaying) {
+						hammerSounds.clip = dragSound;
+						hammerSounds.Play();
+					}
+
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x < 0f )
@@ -103,6 +117,14 @@ public class HumanCharacterController : MonoBehaviour {
 				normalizedHorizontalSpeed = -1;
 
 				if( _controller.isGrounded ) {
+					if(playerSounds.clip != walkSound || !playerSounds.isPlaying) {
+						playerSounds.clip = walkSound;
+						playerSounds.Play();
+					}
+					if(hammerSounds.clip != dragSound || !hammerSounds.isPlaying) {
+						hammerSounds.clip = dragSound;
+						hammerSounds.Play();
+					}
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x > 0f )
@@ -163,6 +185,9 @@ public class HumanCharacterController : MonoBehaviour {
 
 		hammerSounds.clip = launchSound;
 		hammerSounds.Play();
+
+		playerSounds.clip = jumpSound;
+		playerSounds.Play();
 
 		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
 		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
