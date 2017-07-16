@@ -126,6 +126,11 @@ public class HumanCharacterController : MonoBehaviour {
 //			_animator.Play( Animator.StringToHash( "Jump" ) );
 //		}
 
+		if( _controller.isGrounded ) //something with velocity here?
+		{
+
+		}
+
 
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
 		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
@@ -151,6 +156,14 @@ public class HumanCharacterController : MonoBehaviour {
 	}
 
 	public void Launch() {
+		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.Find("SmashPosition").position, 1f);
+		for(int i = 0; i < cols.Length; i++) {
+			if(cols[i].GetComponent<CrystalDevice>() != null) {
+				cols[i].GetComponent<CrystalDevice>().Smash();
+			}
+		}
+
+
 		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
 		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f);
 //		smashParticles.Play(true);

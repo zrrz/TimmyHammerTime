@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 212669986591232050}
   - component: {fileID: 114503429338937684}
   - component: {fileID: 61204202020560700}
-  m_Layer: 0
+  - component: {fileID: 114541157520836858}
+  m_Layer: 10
   m_Name: Crystal_BlockOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +55,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.5, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -150,6 +151,18 @@ MonoBehaviour:
   cacheCollider: {fileID: 0}
   sortingOrder: 0
   tiles: []
+--- !u!114 &114541157520836858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587101230059042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f179c86007b6fc4eaeb6cde2540366f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
 --- !u!212 &212669986591232050
 SpriteRenderer:
   m_ObjectHideFlags: 1
