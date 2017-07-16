@@ -64,22 +64,38 @@ MonoBehaviour:
   tileSprite: 
   thumbnail: {fileID: 0}
   hideInHierarchy: 0
-  tileA: []
-  tileC: []
-  tileCE: []
-  tileCN: []
-  tileCS: []
-  tileCW: []
-  tileE: []
-  tileN: []
-  tileNE: []
-  tileNS: []
-  tileNW: []
-  tileS: []
-  tileSE: []
-  tileSW: []
-  tileW: []
-  tileWE: []
+  tileA:
+  - {fileID: 21300024, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileC:
+  - {fileID: 21300012, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileCE:
+  - {fileID: 21300014, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileCN:
+  - {fileID: 21300004, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileCS:
+  - {fileID: 21300020, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileCW:
+  - {fileID: 21300010, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileE:
+  - {fileID: 21300030, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileN:
+  - {fileID: 21300000, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileNE:
+  - {fileID: 21300006, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileNS:
+  - {fileID: 21300028, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileNW:
+  - {fileID: 21300002, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileS:
+  - {fileID: 21300016, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileSE:
+  - {fileID: 21300022, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileSW:
+  - {fileID: 21300018, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileW:
+  - {fileID: 21300026, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
+  tileWE:
+  - {fileID: 21300008, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
   tileCNW: []
   tileCNE: []
   tileCSE: []
@@ -155,7 +171,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300024, guid: 21fa8475c626d8d44a532724d6bbce0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,5 +179,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
