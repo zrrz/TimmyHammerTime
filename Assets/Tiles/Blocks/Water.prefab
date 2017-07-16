@@ -67,16 +67,20 @@ MonoBehaviour:
   tileA: []
   tileC:
   - {fileID: 21300016, guid: d631851f8a1eb7043b4e1566c0eb148e, type: 3}
-  tileCE: []
+  tileCE:
+  - {fileID: 21300016, guid: d631851f8a1eb7043b4e1566c0eb148e, type: 3}
   tileCN:
   - {fileID: 21300000, guid: d631851f8a1eb7043b4e1566c0eb148e, type: 3}
   tileCS: []
-  tileCW: []
+  tileCW:
+  - {fileID: 21300016, guid: d631851f8a1eb7043b4e1566c0eb148e, type: 3}
   tileE: []
   tileN: []
-  tileNE: []
+  tileNE:
+  - {fileID: 21300000, guid: d631851f8a1eb7043b4e1566c0eb148e, type: 3}
   tileNS: []
-  tileNW: []
+  tileNW:
+  - {fileID: 21300000, guid: d631851f8a1eb7043b4e1566c0eb148e, type: 3}
   tileS: []
   tileSE: []
   tileSW: []
