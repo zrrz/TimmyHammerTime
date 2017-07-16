@@ -28,14 +28,20 @@ public class HumanCharacterController : MonoBehaviour {
 
 	public ParticleSystem smashParticles;
 
+	[Header("Sounds")]
+	[Space]
 	public AudioSource hammerSounds;
 	public AudioClip swingSound;
 	public AudioClip launchSound;
-	public AudioClip dragSound;
 
+	[Space]
 	public AudioSource playerSounds;
 	public AudioClip jumpSound;
 	public AudioClip walkSound;
+
+	[Space]
+	public AudioSource altPlayerSounds;
+	public AudioClip dragSound;
 
 	void Awake()
 	{
@@ -101,9 +107,9 @@ public class HumanCharacterController : MonoBehaviour {
 						playerSounds.clip = walkSound;
 						playerSounds.Play();
 					}
-					if(hammerSounds.clip != dragSound || !hammerSounds.isPlaying) {
-						hammerSounds.clip = dragSound;
-						hammerSounds.Play();
+					if(altPlayerSounds.clip != dragSound || !altPlayerSounds.isPlaying) {
+						altPlayerSounds.clip = dragSound;
+						altPlayerSounds.Play();
 					}
 
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
@@ -121,9 +127,9 @@ public class HumanCharacterController : MonoBehaviour {
 						playerSounds.clip = walkSound;
 						playerSounds.Play();
 					}
-					if(hammerSounds.clip != dragSound || !hammerSounds.isPlaying) {
-						hammerSounds.clip = dragSound;
-						hammerSounds.Play();
+					if(altPlayerSounds.clip != dragSound || !altPlayerSounds.isPlaying) {
+						altPlayerSounds.clip = dragSound;
+						altPlayerSounds.Play();
 					}
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
