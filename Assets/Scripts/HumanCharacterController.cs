@@ -74,7 +74,15 @@ public class HumanCharacterController : MonoBehaviour {
 
 	void onTriggerEnterEvent( Collider2D col )
 	{
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+//		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+		if(col.gameObject.name == "Door") {
+			col.gameObject.GetComponent<Animator>().Play("DoorOpen");
+			Invoke("GhettoNextScene", 0.67f);
+		}
+	}
+
+	void GhettoNextScene() {
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
 
@@ -158,12 +166,6 @@ public class HumanCharacterController : MonoBehaviour {
 //			_animator.Play( Animator.StringToHash( "Jump" ) );
 //		}
 
-		if( _controller.isGrounded )
-		{
-
-		}
-
-
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
 		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
 		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
@@ -193,6 +195,8 @@ public class HumanCharacterController : MonoBehaviour {
 			}
 		}
 
+//		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
+
 		hammerSounds.clip = launchSound;
 		hammerSounds.Play();
 
@@ -200,7 +204,8 @@ public class HumanCharacterController : MonoBehaviour {
 		playerSounds.Play();
 
 		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
-		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
+		GameObject smashParticleObj = (GameObject)Instantiate(smashParticles.gameObject, transform.Find("SmashPosition").position, smashParticles.transform.rotation);
+		Destroy(smashParticleObj, 1.2f); //idk this doesnt work yet
 //		smashParticles.Play(true);
 //		attacking = false;
 	}
