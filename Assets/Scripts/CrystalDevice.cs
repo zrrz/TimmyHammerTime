@@ -12,7 +12,7 @@ public class CrystalDevice : MonoBehaviour {
 	AudioSource audioSource;
 
 	void Start () {
-		audioSource = GetComponent<AudioSource>();
+		audioSource = gameObject.AddComponent<AudioSource>();
 		crystals = new List<CrystalBlock>();
 		foreach(CrystalBlock block in FindObjectsOfType<CrystalBlock>()) {
 			if(block.color == color) {
