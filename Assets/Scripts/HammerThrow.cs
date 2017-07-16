@@ -17,4 +17,10 @@ public class HammerThrow : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col) {
 
 	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		if(col.GetComponent<CrystalDevice>() != null) {
+			col.GetComponent<CrystalDevice>().Smash();
+		}
+	}
 }

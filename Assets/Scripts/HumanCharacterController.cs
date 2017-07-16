@@ -113,6 +113,9 @@ public class HumanCharacterController : MonoBehaviour {
 	void onTriggerStayEvent( Collider2D col )
 	{
 		if(col.gameObject.name == "HammerThrow") {
+			if(hasHammer)
+				return;
+			Debug.LogError("picking up");
 			if(throwTimer > 0f)
 				return;
 			col.gameObject.SetActive(false);
@@ -122,6 +125,9 @@ public class HumanCharacterController : MonoBehaviour {
 			normalCollider.enabled = false;
 			_controller.boxCollider = hammerCollider;
 			_controller.recalculateDistanceBetweenRays();
+			transform.Find("Graphics").transform.position += new Vector3(0.469f, 0f, 0f);
+			transform.position -= new Vector3(0.469f, 0f, 0f);
+			transform.Find("Graphics").Find("CameraTarget").localPosition = new Vector3(-0.29f, 0.344f, 0f);
 		}
 	}
 
@@ -178,7 +184,10 @@ public class HumanCharacterController : MonoBehaviour {
 						transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					}
 
-					_animator.Play( Animator.StringToHash( "Walk" ) );
+					if(hasHammer)
+						_animator.Play( Animator.StringToHash( "Walk" ) );
+					else
+						_animator.Play( Animator.StringToHash( "WalkNoHammer" ) );
 					if( transform.localScale.x < 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 				}
@@ -201,7 +210,10 @@ public class HumanCharacterController : MonoBehaviour {
 						transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					}
 
-					_animator.Play( Animator.StringToHash( "Walk" ) );
+					if(hasHammer)
+						_animator.Play( Animator.StringToHash( "Walk" ) );
+					else
+						_animator.Play( Animator.StringToHash( "WalkNoHammer" ) );
 					if( transform.localScale.x > 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 				}
@@ -211,7 +223,10 @@ public class HumanCharacterController : MonoBehaviour {
 				normalizedHorizontalSpeed = 0;
 
 //					if( _controller.isGrounded )
+				if(hasHammer)
 					_animator.Play( Animator.StringToHash( "Idle" ) );
+				else
+					_animator.Play( Animator.StringToHash( "IdleNoHammer" ) );
 			}
 		}
 
@@ -288,8 +303,9 @@ public class HumanCharacterController : MonoBehaviour {
 		normalCollider.enabled = true;
 		_controller.boxCollider = normalCollider;
 		_controller.recalculateDistanceBetweenRays();
-
-		//TODO change pivot of character by scooting him over and then scooting the parent object back to adjust.
+		transform.Find("Graphics").transform.localPosition -= new Vector3(0.469f, 0f, 0f);
+		transform.position += new Vector3(0.469f, 0f, 0f);
+		transform.Find("Graphics").Find("CameraTarget").localPosition = new Vector3(0.169f, 0.344f, 0f);
 	}
 
 }
