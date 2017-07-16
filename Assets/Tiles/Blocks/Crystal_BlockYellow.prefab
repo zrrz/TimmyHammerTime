@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 2
+  breakSound: {fileID: 8300000, guid: f4cf93a390b91fe42b1049e24cac12ee, type: 3}
 --- !u!114 &114896843908301192
 MonoBehaviour:
   m_ObjectHideFlags: 1

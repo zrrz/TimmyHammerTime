@@ -66,8 +66,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641006974323216}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 14, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4478214343275200}
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  breakSound: {fileID: 8300000, guid: f4cf93a390b91fe42b1049e24cac12ee, type: 3}
 --- !u!114 &114710686274880088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,7 +149,7 @@ MonoBehaviour:
   particles: {fileID: 0}
   attachments: []
   currentAttachment: {fileID: 0}
-  tileSprite: A
+  tileSprite: 
   thumbnail: {fileID: 21300038, guid: 165d3a99b1c553f45944e030adfcccc0, type: 3}
   hideInHierarchy: 0
   tileA:
@@ -207,9 +208,9 @@ MonoBehaviour:
   neTile: {fileID: 0}
   seTile: {fileID: 0}
   swTile: {fileID: 0}
-  cacheRenderer: {fileID: 212019867153127746}
-  cacheCollider: {fileID: 61415463514133490}
-  sortingOrder: 1
+  cacheRenderer: {fileID: 0}
+  cacheCollider: {fileID: 0}
+  sortingOrder: 0
   tiles: []
 --- !u!212 &212019867153127746
 SpriteRenderer:
@@ -242,7 +243,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -29999
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300038, guid: 165d3a99b1c553f45944e030adfcccc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

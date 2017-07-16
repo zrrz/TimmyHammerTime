@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 5
+  breakSound: {fileID: 8300000, guid: f4cf93a390b91fe42b1049e24cac12ee, type: 3}
 --- !u!212 &212200427516284982
 SpriteRenderer:
   m_ObjectHideFlags: 1
