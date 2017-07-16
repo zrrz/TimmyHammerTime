@@ -29,8 +29,8 @@ public class HumanCharacterController : MonoBehaviour {
 	public ParticleSystem smashParticles;
 
 	public AudioSource hammerSounds;
-	public string swingSound;
-	public string launchSound;
+	public AudioClip swingSound;
+	public AudioClip launchSound;
 
 	void Awake()
 	{
@@ -83,7 +83,8 @@ public class HumanCharacterController : MonoBehaviour {
 
 			if(melee &&  _controller.isGrounded) {
 				_animator.Play( Animator.StringToHash( "Attack" ) );
-				hammerSounds.Play(swingSound);
+				hammerSounds.clip = swingSound;
+				hammerSounds.Play();
 			}
 
 			if( moveDir.x > 0f )
@@ -160,7 +161,8 @@ public class HumanCharacterController : MonoBehaviour {
 			}
 		}
 
-		hammerSounds.Play(launchSound);
+		hammerSounds.clip = launchSound;
+		hammerSounds.Play();
 
 		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
 		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
