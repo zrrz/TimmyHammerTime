@@ -74,7 +74,15 @@ public class HumanCharacterController : MonoBehaviour {
 
 	void onTriggerEnterEvent( Collider2D col )
 	{
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+//		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+		if(col.gameObject.name == "Door") {
+			col.gameObject.GetComponent<Animator>().Play("DoorOpen");
+			Invoke("GhettoNextScene", 0.67f);
+		}
+	}
+
+	void GhettoNextScene() {
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
 
