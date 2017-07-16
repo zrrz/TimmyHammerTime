@@ -8,7 +8,11 @@ public class CrystalDevice : MonoBehaviour {
 
 	public CrystalBlock.CrystalColor color;
 
+	public AudioClip breakSound;
+	AudioSource audioSource;
+
 	void Start () {
+		audioSource = GetComponent<AudioSource>();
 		crystals = new List<CrystalBlock>();
 		foreach(CrystalBlock block in FindObjectsOfType<CrystalBlock>()) {
 			if(block.color == color) {
@@ -19,17 +23,13 @@ public class CrystalDevice : MonoBehaviour {
 //		crystals.Sort((c1, c2)=>Vector3.Distance(transform.position, c1.transform.position).CompareTo(Vector3.Distance(transform.position, c2.transform.position)));
 	}
 
-//	void Update() {
-//		if(Input.GetKeyDown(KeyCode.Q)) {
-//			Smash();
-//		}
-//	}
-
 	public void Smash() {
 		for(int i = 0; i < crystals.Count; i++) {
 			float delay = Vector3.Distance(transform.position, crystals[i].transform.position) / 10f;
 			crystals[i].Break(delay);
 		}
+		audioSource.clip = breakSound;
+		audioSource.Play();
 		Destroy(gameObject);
 	}
 }

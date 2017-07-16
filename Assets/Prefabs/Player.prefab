@@ -602,9 +602,13 @@ MonoBehaviour:
   attackVelocity: {x: 7, y: 11}
   smashParticles: {fileID: 198712109552307666, guid: f8bd1ed669d4a4c4994a5f6977a267ec,
     type: 2}
-  hammerSounds: {fileID: 82255459038311272}
-  swingSound: {fileID: 8300000, guid: 663edc5cced87214b85b9ae193a86397, type: 3}
-  launchSound: {fileID: 8300000, guid: 1a0dba90fd6df0c45a029483970ec7c1, type: 3}
+  hammerSounds: {fileID: 0}
+  swingSound: {fileID: 0}
+  launchSound: {fileID: 0}
+  dragSound: {fileID: 0}
+  playerSounds: {fileID: 0}
+  jumpSound: {fileID: 0}
+  walkSound: {fileID: 0}
 --- !u!124 &124871706696120042
 Behaviour:
   m_ObjectHideFlags: 1

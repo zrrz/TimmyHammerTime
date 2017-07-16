@@ -10,6 +10,13 @@ public class CrystalBlock : MonoBehaviour {
 
 	public CrystalColor color;
 
+	public AudioClip breakSound;
+	AudioSource audioSource;
+
+	void Start() {
+		audioSource = GetComponent<AudioSource>();
+	}
+
 	public void Break(float delay = 0f) {
 		StartCoroutine(DelayBreak(delay));
 	}
@@ -20,6 +27,9 @@ public class CrystalBlock : MonoBehaviour {
 		GetComponent<SpriteRenderer>().enabled = false;
 		GetComponent<Collider2D>().enabled = false;
 		transform.GetChild(0).gameObject.SetActive(true);
+
+		audioSource.clip = breakSound;
+		audioSource.Play();
 
 		yield return new WaitForSeconds(0.5f); //I'm just going to hardcode the anim length fuck it
 		Destroy(gameObject);
