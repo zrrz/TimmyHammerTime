@@ -73,6 +73,7 @@ public class HumanCharacterController : MonoBehaviour {
 //		if( _controller.isGrounded ) {
 //			_velocity.y = 0;
 //		}
+		transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = false; //Eh. Not efficient.
 
 		if(!attacking) {
 //			if( _controller.isGrounded ) {
@@ -91,6 +92,7 @@ public class HumanCharacterController : MonoBehaviour {
 //					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 				if( _controller.isGrounded ) {
+					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x < 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
@@ -103,6 +105,7 @@ public class HumanCharacterController : MonoBehaviour {
 //					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 				if( _controller.isGrounded ) {
+					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x > 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );

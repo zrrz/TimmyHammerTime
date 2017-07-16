@@ -16,8 +16,12 @@ public class CrystalBlock : MonoBehaviour {
 
 	IEnumerator DelayBreak(float delay) {
 		yield return new WaitForSeconds(delay);
-		//Do animation
-//		yield return new WaitForSeconds(GetComponent<Animation>().GetClip("Break").length;
+
+		GetComponent<SpriteRenderer>().enabled = false;
+		GetComponent<Collider2D>().enabled = false;
+		transform.GetChild(0).gameObject.SetActive(true);
+
+		yield return new WaitForSeconds(0.5f); //I'm just going to hardcode the anim length fuck it
 		Destroy(gameObject);
 	}
 }

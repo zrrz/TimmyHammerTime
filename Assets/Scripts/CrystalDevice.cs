@@ -27,7 +27,7 @@ public class CrystalDevice : MonoBehaviour {
 
 	public void Smash() {
 		for(int i = 0; i < crystals.Count; i++) {
-			float delay = Vector3.Distance(transform.position, crystals[i].transform.position) / 8f;
+			float delay = Vector3.Distance(transform.position, crystals[i].transform.position) / 10f;
 			crystals[i].Break(delay);
 		}
 		Destroy(gameObject);
