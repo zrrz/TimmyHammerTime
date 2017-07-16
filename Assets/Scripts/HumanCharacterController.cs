@@ -28,6 +28,19 @@ public class HumanCharacterController : MonoBehaviour {
 
 	public ParticleSystem smashParticles;
 
+	public Transform startAngle;
+	public Transform endAndgle;
+
+	public Transform hammerObj;
+	float throwTimer = 0f;
+
+	bool hasHammer = true;
+
+	[SerializeField]
+	BoxCollider2D hammerCollider;
+	[SerializeField]
+	BoxCollider2D normalCollider;
+
 	[Header("Sounds")]
 	[Space]
 	AudioSource hammerSounds;
@@ -55,9 +68,18 @@ public class HumanCharacterController : MonoBehaviour {
 		// listen to some events for illustration purposes
 		_controller.onControllerCollidedEvent += onControllerCollider;
 		_controller.onTriggerEnterEvent += onTriggerEnterEvent;
+		_controller.onTriggerStayEvent += onTriggerStayEvent;
 		_controller.onTriggerExitEvent += onTriggerExitEvent;
+
+		hammerObj.transform.parent = null;
 	}
 
+	void Start() {
+		hammerCollider.enabled = true;
+		normalCollider.enabled = false;
+		_controller.boxCollider = hammerCollider;
+		_controller.recalculateDistanceBetweenRays();
+	}
 
 	#region Event Listeners
 
@@ -79,6 +101,28 @@ public class HumanCharacterController : MonoBehaviour {
 			col.gameObject.GetComponent<Animator>().Play("DoorOpen");
 			Invoke("GhettoNextScene", 0.67f);
 		}
+//		if(col.gameObject.name == "HammerThrow") {
+//			if(throwTimer > 0f)
+//				return;
+//			col.gameObject.SetActive(false);
+//			transform.Find("Graphics").Find("Hammer").gameObject.SetActive(true);
+//			hasHammer = true;
+//		}
+	}
+
+	void onTriggerStayEvent( Collider2D col )
+	{
+		if(col.gameObject.name == "HammerThrow") {
+			if(throwTimer > 0f)
+				return;
+			col.gameObject.SetActive(false);
+			transform.Find("Graphics").Find("Hammer").gameObject.SetActive(true);
+			hasHammer = true;
+			hammerCollider.enabled = true;
+			normalCollider.enabled = false;
+			_controller.boxCollider = hammerCollider;
+			_controller.recalculateDistanceBetweenRays();
+		}
 	}
 
 	void GhettoNextScene() {
@@ -88,7 +132,7 @@ public class HumanCharacterController : MonoBehaviour {
 
 	void onTriggerExitEvent( Collider2D col )
 	{
-		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
+//		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
 	}
 
 	#endregion
@@ -97,14 +141,20 @@ public class HumanCharacterController : MonoBehaviour {
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+		if(throwTimer > 0f)
+			throwTimer -= Time.deltaTime;
+		
 		transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = false; //Eh. Not efficient.
 
-		if(!attacking) {
+		if(attacking) {
+			bool release = InputController.input.Release.WasPressed;
+//			_animator.GetCurrentAnimatorStateInfo(
+		} else if(!attacking) {
 //			if( _controller.isGrounded ) {
 			bool melee = InputController.input.Melee.WasPressed;
 			Vector3	moveDir = InputController.input.Move;
 
-			if(melee &&  _controller.isGrounded) {
+			if(hasHammer && melee &&  _controller.isGrounded) {
 				_animator.Play( Animator.StringToHash( "Attack" ) );
 				hammerSounds.clip = swingSound;
 				hammerSounds.Play();
@@ -119,12 +169,15 @@ public class HumanCharacterController : MonoBehaviour {
 						playerSounds.clip = walkSound;
 						playerSounds.Play();
 					}
-					if(altPlayerSounds.clip != dragSound || !altPlayerSounds.isPlaying) {
-						altPlayerSounds.clip = dragSound;
-						altPlayerSounds.Play();
+					if(hasHammer) {
+						if(altPlayerSounds.clip != dragSound || !altPlayerSounds.isPlaying) {
+							altPlayerSounds.clip = dragSound;
+							altPlayerSounds.Play();
+						}
+
+						transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					}
 
-					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x < 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
@@ -139,11 +192,15 @@ public class HumanCharacterController : MonoBehaviour {
 						playerSounds.clip = walkSound;
 						playerSounds.Play();
 					}
-					if(altPlayerSounds.clip != dragSound || !altPlayerSounds.isPlaying) {
-						altPlayerSounds.clip = dragSound;
-						altPlayerSounds.Play();
+					if(hasHammer) {
+						if(altPlayerSounds.clip != dragSound || !altPlayerSounds.isPlaying) {
+							altPlayerSounds.clip = dragSound;
+							altPlayerSounds.Play();
+						}
+
+						transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					}
-					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
+
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x > 0f )
 						transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
@@ -188,6 +245,8 @@ public class HumanCharacterController : MonoBehaviour {
 	}
 
 	public void Launch() {
+		if(!attacking)
+			return;
 		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.Find("SmashPosition").position, 1f);
 		for(int i = 0; i < cols.Length; i++) {
 			if(cols[i].GetComponent<CrystalDevice>() != null) {
@@ -208,6 +267,29 @@ public class HumanCharacterController : MonoBehaviour {
 		Destroy(smashParticleObj, 1.2f); //idk this doesnt work yet
 //		smashParticles.Play(true);
 //		attacking = false;
+	}
+
+	public void Release(float normalizedTime) {
+		if(normalizedTime < 0.2f || normalizedTime > 0.8f)
+			return;
+		attacking = false;
+//		_animator.GetCurrentAnimatorStateInfo(0).normalizedTime = 1f;
+		_animator.Play( Animator.StringToHash( "Idle" ) );
+		Vector3 hammerAngle = Vector3.Lerp(startAngle.up, endAndgle.up, normalizedTime);
+		Debug.DrawRay(transform.position, hammerAngle, Color.blue, 1.5f);
+		hammerObj.gameObject.SetActive(true);
+		hammerObj.up = hammerAngle;
+		hammerObj.transform.position = transform.position + new Vector3(0.323f, -0.17f, 0f);
+		hammerObj.GetComponent<Rigidbody2D>().velocity = hammerAngle*10f;
+		transform.Find("Graphics").Find("Hammer").gameObject.SetActive(false);
+		throwTimer = 0.5f;
+		hasHammer = false;
+		hammerCollider.enabled = false;
+		normalCollider.enabled = true;
+		_controller.boxCollider = normalCollider;
+		_controller.recalculateDistanceBetweenRays();
+
+		//TODO change pivot of character by scooting him over and then scooting the parent object back to adjust.
 	}
 
 }

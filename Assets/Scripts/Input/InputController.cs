@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour {
 //		public PlayerAction Fire;
 //		public PlayerAction Reload;
 		public PlayerAction Melee;
+		public PlayerAction Release;
 //		public PlayerAction Interact;
 //		public PlayerAction Aim;
 //		public PlayerAction Sprint;
@@ -29,6 +30,7 @@ public class InputController : MonoBehaviour {
 //			Fire = CreatePlayerAction( "Fire" );
 //			Reload = CreatePlayerAction( "Reload" );
 			Melee = CreatePlayerAction( "Melee" );
+			Release = CreatePlayerAction( "Release" );
 //			Interact = CreatePlayerAction( "Interact" );
 //			Aim = CreatePlayerAction( "Aim" );
 //			Sprint = CreatePlayerAction( "Sprint" );
@@ -54,8 +56,11 @@ public class InputController : MonoBehaviour {
 //			playerActions.Reload.AddDefaultBinding( InputControlType.Action3 );
 //			playerActions.Reload.AddDefaultBinding( Key.R );
 
-			playerActions.Melee.AddDefaultBinding( Key.F );
+			playerActions.Melee.AddDefaultBinding( Mouse.LeftButton );
 			playerActions.Melee.AddDefaultBinding( InputControlType.Action2 );
+
+			playerActions.Release.AddDefaultBinding( Mouse.RightButton );
+			playerActions.Release.AddDefaultBinding( InputControlType.Action2 );
 
 //			playerActions.Interact.AddDefaultBinding( Key.E );
 //			playerActions.Interact.AddDefaultBinding( InputControlType.Action1 );
