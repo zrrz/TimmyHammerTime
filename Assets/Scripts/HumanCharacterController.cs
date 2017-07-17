@@ -58,13 +58,18 @@ public class HumanCharacterController : MonoBehaviour {
 	[Space]
 	AudioSource altPlayerSounds;
 	public AudioClip dragSound;
+
+	[Space]
+	AudioSource hurtPlayerSounds;
 	public AudioClip doorSound;
+	public AudioClip[] hurtClips;
 
 	void Awake()
 	{
 		hammerSounds = gameObject.AddComponent<AudioSource>();
 		playerSounds = gameObject.AddComponent<AudioSource>();
 		altPlayerSounds = gameObject.AddComponent<AudioSource>();
+		hurtPlayerSounds = gameObject.AddComponent<AudioSource>();
 
 		_animator = GetComponentInChildren<Animator>();
 		_controller = GetComponent<CharacterController2D>();
@@ -105,9 +110,9 @@ public class HumanCharacterController : MonoBehaviour {
 //		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 		if(col.gameObject.name == "Door") {
 			col.gameObject.GetComponent<Animator>().Play("DoorOpen");
-			altPlayerSounds.clip = doorSound;
-			altPlayerSounds.Play();
-			Invoke("GhettoNextScene", 0.67f);
+			hurtPlayerSounds.clip = doorSound;
+			hurtPlayerSounds.Play();
+			Invoke("GhettoNextScene", 1.2f);
 		}
 //		if(col.gameObject.name == "HammerThrow") {
 //			if(throwTimer > 0f)
@@ -157,6 +162,7 @@ public class HumanCharacterController : MonoBehaviour {
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+		if(GetComponent<HealthHandler>().invulnerableTimer <= GetComponent<HealthHandler>().invulnerableTime/2f) {
 		if(throwTimer > 0f)
 			throwTimer -= Time.deltaTime;
 		
@@ -239,6 +245,9 @@ public class HumanCharacterController : MonoBehaviour {
 					_animator.Play( Animator.StringToHash( "IdleNoHammer" ) );
 			}
 		}
+		} else {
+			normalizedHorizontalSpeed = 0;
+		}
 
 
 //		// we can only jump whilst grounded
@@ -300,7 +309,10 @@ public class HumanCharacterController : MonoBehaviour {
 	public void KnockBack() {
 		attacking = false;
 		_animator.Play( Animator.StringToHash( "Damage" ) );
-		_velocity = new Vector3(-4f * transform.localScale.x, 4f, 0f);
+		_velocity = new Vector3(-5f * transform.localScale.x, 5f, 0f);
+
+		hurtPlayerSounds.clip = hurtClips[Random.Range(0, hurtClips.Length)];
+		hurtPlayerSounds.Play();
 	}
 
 	public void Release(float normalizedTime) {

@@ -24,6 +24,10 @@ public class SimpleEnemy : MonoBehaviour {
 
 	float direction = 1f;
 
+	[Space]
+	AudioSource enemySounds;
+	public AudioClip walkSound;
+
 //	[System.NonSerialized]
 //	public bool attacking = false;
 
@@ -36,6 +40,7 @@ public class SimpleEnemy : MonoBehaviour {
 	{
 		_animator = GetComponentInChildren<Animator>();
 		_controller = GetComponent<CharacterController2D>();
+		enemySounds = gameObject.GetComponent<AudioSource>();
 
 		// listen to some events for illustration purposes
 		_controller.onControllerCollidedEvent += onControllerCollider;
@@ -45,7 +50,6 @@ public class SimpleEnemy : MonoBehaviour {
 
 		direction = transform.localScale.x;
 	}
-
 
 	#region Event Listeners
 
@@ -97,6 +101,8 @@ public class SimpleEnemy : MonoBehaviour {
 		transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = false;
 		this.enabled = false;
 		GetComponentInChildren<SpriteRenderer>().sortingOrder -= 1;
+		if(GetComponent<GhettoPlaySoundOnDeath>() != null)
+			GetComponent<GhettoPlaySoundOnDeath>().PlaySound();
 	}
 
 
@@ -124,6 +130,11 @@ public class SimpleEnemy : MonoBehaviour {
 				//					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 				if( _controller.isGrounded ) {
+					if(enemySounds.clip != walkSound || !enemySounds.isPlaying) {
+						enemySounds.clip = walkSound;
+						enemySounds.Play();
+					}
+
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x < 0f )
@@ -137,6 +148,10 @@ public class SimpleEnemy : MonoBehaviour {
 				//					transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 				if( _controller.isGrounded ) {
+					if(enemySounds.clip != walkSound || !enemySounds.isPlaying) {
+						enemySounds.clip = walkSound;
+						enemySounds.Play();
+					}
 					transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
 					_animator.Play( Animator.StringToHash( "Walk" ) );
 					if( transform.localScale.x > 0f )

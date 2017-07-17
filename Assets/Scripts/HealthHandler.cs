@@ -20,7 +20,8 @@ public class HealthHandler : MonoBehaviour {
 		}
 	}
 
-	float invulnerableTimer = 0f;
+	[System.NonSerialized]
+	public float invulnerableTimer = 0f;
 	public float invulnerableTime = 1f;
 
 	public void ApplyDamage(int damage) {
