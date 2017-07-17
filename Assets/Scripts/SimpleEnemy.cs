@@ -18,15 +18,17 @@ public class SimpleEnemy : MonoBehaviour {
 	private CharacterController2D _controller;
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
-	[SerializeField]
 	private Vector3 _velocity;
 
-	public Vector2 attackVelocity;
+//	public Vector2 attackVelocity;
 
 	float direction = 1f;
 
 //	[System.NonSerialized]
 //	public bool attacking = false;
+
+//	public bool isCrystal;
+//	public CrystalBlock.CrystalColor color;
 
 //	public ParticleSystem smashParticles;
 
@@ -39,6 +41,7 @@ public class SimpleEnemy : MonoBehaviour {
 		_controller.onControllerCollidedEvent += onControllerCollider;
 		_controller.onTriggerEnterEvent += onTriggerEnterEvent;
 		_controller.onTriggerExitEvent += onTriggerExitEvent;
+		_controller.onTriggerStayEvent += onTriggerStayEvent;
 
 		direction = transform.localScale.x;
 	}
@@ -62,16 +65,39 @@ public class SimpleEnemy : MonoBehaviour {
 
 	void onTriggerEnterEvent( Collider2D col )
 	{
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+//		if(col.gameObject.layer == LayerMask.NameToLayer("Hammer")) {
+//			GetComponent<HealthHandler>().ApplyDamage(1);
+//		}
+//		if(col.gameObject.layer == LayerMask.NameToLayer("Player")) {
+//			col.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);
+//		}
+//		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+	}
+
+	void onTriggerStayEvent( Collider2D col )
+	{
+		if(col.gameObject.layer == LayerMask.NameToLayer("Hammer")) {
+			GetComponent<HealthHandler>().ApplyDamage(1);
+		}
+		if(col.gameObject.layer == LayerMask.NameToLayer("Player")) {
+			col.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);
+		}
+//		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 	}
 
 
 	void onTriggerExitEvent( Collider2D col )
 	{
-		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
+//		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
 	}
 
 	#endregion
+
+	void Death() {
+		transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = false;
+		this.enabled = false;
+		GetComponentInChildren<SpriteRenderer>().sortingOrder -= 1;
+	}
 
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation

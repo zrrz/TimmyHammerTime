@@ -28,8 +28,10 @@ public class CrystalDevice : MonoBehaviour {
 			float delay = Vector3.Distance(transform.position, crystals[i].transform.position) / 10f;
 			crystals[i].Break(delay);
 		}
-		audioSource.clip = breakSound;
-		audioSource.Play();
+		if(breakSound) {
+			audioSource.clip = breakSound;
+			audioSource.Play();
+		}
 		Destroy(gameObject);
 	}
 }

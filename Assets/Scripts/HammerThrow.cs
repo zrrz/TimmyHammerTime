@@ -15,10 +15,17 @@ public class HammerThrow : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
-
+//		Debug.LogError("Col: " + col.gameObject);
+//		if(col.gameObject.layer == LayerMask.GetMask("Enemy")) {
+//			col.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);
+//		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
+//		Debug.LogError("trigger: " + col.gameObject);
+//		if(col.gameObject.layer == LayerMask.GetMask("Enemy")) {
+//			col.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);
+//		}
 		if(col.GetComponent<CrystalDevice>() != null) {
 			col.GetComponent<CrystalDevice>().Smash();
 		}

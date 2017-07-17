@@ -15,12 +15,19 @@ public class HealthHandler : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Q)) {
-			ApplyDamage(1);
+		if(invulnerableTimer > 0f) {
+			invulnerableTimer -= Time.deltaTime;
 		}
 	}
 
-	void ApplyDamage(int damage) {
+	float invulnerableTimer = 0f;
+	public float invulnerableTime = 1f;
+
+	public void ApplyDamage(int damage) {
+		if(invulnerableTimer > 0f) {
+			return;
+		}
+		invulnerableTimer += invulnerableTime;
 		if(isPlayer)
 			UpdateHealthUI(damage);
 		
@@ -28,16 +35,26 @@ public class HealthHandler : MonoBehaviour {
 
 		if(currentHealth <= 0) {
 			Die();
+		} else {
+			GetComponent<HumanCharacterController>().KnockBack();
 		}
 	}
 
 	void Die() {
 		if(isPlayer) {
+			//Die animation?
+			FindObjectOfType<GhettoRestartManager>().RestartLevel();
 			//Game over shit
 		} else {
+//			Debug.LogError("Death");
 			GetComponent<Animator>().Play("Death");
-//			SendMessage("Death");
-			Destroy(gameObject, GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); //This might be looking at wrong state b4 animator changes
+			SendMessage("Death");
+			foreach(Collider2D col in GetComponents<Collider2D>()) {
+				col.enabled = false;
+			}
+			if(GetComponent<SimpleEnemy>() != null)
+				GetComponent<SimpleEnemy>().enabled = false;
+//			Destroy(gameObject, GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); //This might be looking at wrong state b4 animator changes
 		}
 	}
 

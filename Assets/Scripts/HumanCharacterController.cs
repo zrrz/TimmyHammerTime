@@ -18,7 +18,6 @@ public class HumanCharacterController : MonoBehaviour {
 	private CharacterController2D _controller;
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
-	[SerializeField]
 	private Vector3 _velocity;
 
 	public Vector2 attackVelocity;
@@ -40,6 +39,10 @@ public class HumanCharacterController : MonoBehaviour {
 	BoxCollider2D hammerCollider;
 	[SerializeField]
 	BoxCollider2D normalCollider;
+	[SerializeField]
+	BoxCollider2D hammerTriggerCollider;
+	[SerializeField]
+	BoxCollider2D normalTriggerCollider;
 
 	[Header("Sounds")]
 	[Space]
@@ -55,6 +58,7 @@ public class HumanCharacterController : MonoBehaviour {
 	[Space]
 	AudioSource altPlayerSounds;
 	public AudioClip dragSound;
+	public AudioClip doorSound;
 
 	void Awake()
 	{
@@ -76,7 +80,9 @@ public class HumanCharacterController : MonoBehaviour {
 
 	void Start() {
 		hammerCollider.enabled = true;
+		hammerTriggerCollider.enabled = true;
 		normalCollider.enabled = false;
+		normalTriggerCollider.enabled = false;
 		_controller.boxCollider = hammerCollider;
 		_controller.recalculateDistanceBetweenRays();
 	}
@@ -99,6 +105,8 @@ public class HumanCharacterController : MonoBehaviour {
 //		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 		if(col.gameObject.name == "Door") {
 			col.gameObject.GetComponent<Animator>().Play("DoorOpen");
+			altPlayerSounds.clip = doorSound;
+			altPlayerSounds.Play();
 			Invoke("GhettoNextScene", 0.67f);
 		}
 //		if(col.gameObject.name == "HammerThrow") {
@@ -115,7 +123,7 @@ public class HumanCharacterController : MonoBehaviour {
 		if(col.gameObject.name == "HammerThrow") {
 			if(hasHammer)
 				return;
-			Debug.LogError("picking up");
+//			Debug.LogError("picking up");
 			if(throwTimer > 0f)
 				return;
 			col.gameObject.SetActive(false);
@@ -123,10 +131,12 @@ public class HumanCharacterController : MonoBehaviour {
 			hasHammer = true;
 			hammerCollider.enabled = true;
 			normalCollider.enabled = false;
+			hammerTriggerCollider.enabled = true;
+			normalTriggerCollider.enabled = false;
 			_controller.boxCollider = hammerCollider;
 			_controller.recalculateDistanceBetweenRays();
-			transform.Find("Graphics").transform.position += new Vector3(0.469f, 0f, 0f);
-			transform.position -= new Vector3(0.469f, 0f, 0f);
+			transform.Find("Graphics").transform.localPosition = new Vector3(0.3f, 0f, 0f);
+			transform.position -= new Vector3(0.469f, 0f, 0f) * Mathf.Sign(transform.localScale.x);
 			transform.Find("Graphics").Find("CameraTarget").localPosition = new Vector3(-0.29f, 0.344f, 0f);
 		}
 	}
@@ -267,6 +277,9 @@ public class HumanCharacterController : MonoBehaviour {
 			if(cols[i].GetComponent<CrystalDevice>() != null) {
 				cols[i].GetComponent<CrystalDevice>().Smash();
 			}
+			if(cols[i].GetComponent<SimpleEnemy>() != null) {
+				cols[i].GetComponent<HealthHandler>().ApplyDamage(1);
+			}
 		}
 
 //		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
@@ -277,11 +290,17 @@ public class HumanCharacterController : MonoBehaviour {
 		playerSounds.clip = jumpSound;
 		playerSounds.Play();
 
+//		Collider2D[] col
+
 		_velocity = new Vector3(attackVelocity.x * transform.localScale.x, attackVelocity.y, 0f);
 		GameObject smashParticleObj = (GameObject)Instantiate(smashParticles.gameObject, transform.Find("SmashPosition").position, smashParticles.transform.rotation);
-		Destroy(smashParticleObj, 1.2f); //idk this doesnt work yet
-//		smashParticles.Play(true);
-//		attacking = false;
+		Destroy(smashParticleObj, 1.2f);
+	}
+		
+	public void KnockBack() {
+		attacking = false;
+		_animator.Play( Animator.StringToHash( "Damage" ) );
+		_velocity = new Vector3(-4f * transform.localScale.x, 4f, 0f);
 	}
 
 	public void Release(float normalizedTime) {
@@ -300,11 +319,13 @@ public class HumanCharacterController : MonoBehaviour {
 		throwTimer = 0.5f;
 		hasHammer = false;
 		hammerCollider.enabled = false;
+		hammerTriggerCollider.enabled = false;
 		normalCollider.enabled = true;
+		normalTriggerCollider.enabled = true;
 		_controller.boxCollider = normalCollider;
 		_controller.recalculateDistanceBetweenRays();
 		transform.Find("Graphics").transform.localPosition -= new Vector3(0.469f, 0f, 0f);
-		transform.position += new Vector3(0.469f, 0f, 0f);
+		transform.position += new Vector3(0.469f, 0f, 0f) * Mathf.Sign(transform.localScale.x);
 		transform.Find("Graphics").Find("CameraTarget").localPosition = new Vector3(0.169f, 0.344f, 0f);
 	}
 
