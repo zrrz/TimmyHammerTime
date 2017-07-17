@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class GhettoRestartManager : MonoBehaviour {
 
+	void Start() {
+		transform.Find("Canvas").parent = null;
+	}
+
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.R)) {
 			RestartLevel();
 		}
+
 	}
 
 	public void RestartLevel() {

@@ -62,6 +62,11 @@ public class SimpleEnemy : MonoBehaviour {
 		if(Mathf.Abs(hit.normal.x) == 1f)
 			direction *= -1f;
 
+		if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
+			hit.collider.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);
+			GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+		}
+
 		// logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
 		//Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
 	}
@@ -69,6 +74,7 @@ public class SimpleEnemy : MonoBehaviour {
 
 	void onTriggerEnterEvent( Collider2D col )
 	{
+//		Debug.LogError("Trigger enter");
 //		if(col.gameObject.layer == LayerMask.NameToLayer("Hammer")) {
 //			GetComponent<HealthHandler>().ApplyDamage(1);
 //		}
@@ -83,9 +89,7 @@ public class SimpleEnemy : MonoBehaviour {
 		if(col.gameObject.layer == LayerMask.NameToLayer("Hammer")) {
 			GetComponent<HealthHandler>().ApplyDamage(1);
 		}
-		if(col.gameObject.layer == LayerMask.NameToLayer("Player")) {
-			col.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);
-		}
+
 //		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 	}
 

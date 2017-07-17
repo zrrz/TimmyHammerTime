@@ -15,6 +15,11 @@ public class HammerThrow : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
+
+		if(col.gameObject.layer == LayerMask.NameToLayer("Ground") || col.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+			if(rb.velocity.magnitude > 2.4f)
+				Camera.main.GetComponent<CamShakeSimple>().StartShake(0.2f, 0.2f);
+		}
 //		Debug.LogError("Col: " + col.gameObject);
 //		if(col.gameObject.layer == LayerMask.GetMask("Enemy")) {
 //			col.gameObject.GetComponent<HealthHandler>().ApplyDamage(1);

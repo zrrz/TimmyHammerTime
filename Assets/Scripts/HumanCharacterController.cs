@@ -236,6 +236,17 @@ public class HumanCharacterController : MonoBehaviour {
 			}
 			else if( _controller.isGrounded )
 			{
+					if(playerSounds.clip == walkSound && playerSounds.isPlaying) {
+						playerSounds.Stop();
+					}
+					if(hasHammer) {
+						if(altPlayerSounds.clip == dragSound && altPlayerSounds.isPlaying) {
+							altPlayerSounds.Stop();
+						}
+
+						transform.Find("DustTrail_0").GetComponent<SpriteRenderer>().enabled = true;
+					}
+
 				normalizedHorizontalSpeed = 0;
 
 //					if( _controller.isGrounded )
@@ -292,6 +303,8 @@ public class HumanCharacterController : MonoBehaviour {
 		}
 
 //		Destroy(Instantiate(smashParticles, transform.Find("SmashPosition").position, smashParticles.transform.rotation), 1.2f); //idk this doesnt work yet
+
+		Camera.main.GetComponent<CamShakeSimple>().StartShake(0.3f, 0.2f);
 
 		hammerSounds.clip = launchSound;
 		hammerSounds.Play();

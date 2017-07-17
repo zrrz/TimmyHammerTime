@@ -16321,6 +16321,7 @@ MonoBehaviour:
   - {fileID: 1275281753}
   - {fileID: 557728963}
   maxHealth: 3
+  invulnerableTime: 1
 --- !u!50 &727386075
 Rigidbody2D:
   serializedVersion: 4
@@ -16412,7 +16413,6 @@ MonoBehaviour:
   inAirDamping: 1
   jumpHeight: 3
   normalizedHorizontalSpeed: 0
-  _velocity: {x: 0, y: 0, z: 0}
   attackVelocity: {x: 7, y: 11}
   smashParticles: {fileID: 198712109552307666, guid: f8bd1ed669d4a4c4994a5f6977a267ec,
     type: 2}
@@ -16421,11 +16421,15 @@ MonoBehaviour:
   hammerObj: {fileID: 467911217}
   hammerCollider: {fileID: 727386077}
   normalCollider: {fileID: 727386076}
+  hammerTriggerCollider: {fileID: 0}
+  normalTriggerCollider: {fileID: 0}
   swingSound: {fileID: 8300000, guid: 663edc5cced87214b85b9ae193a86397, type: 3}
   launchSound: {fileID: 8300000, guid: 1a0dba90fd6df0c45a029483970ec7c1, type: 3}
   jumpSound: {fileID: 8300000, guid: 37c4d60c3670a9b46910ebf862c718e3, type: 3}
   walkSound: {fileID: 8300000, guid: 79daf8150e363474b863cd97757265ff, type: 3}
   dragSound: {fileID: 8300000, guid: fd0c4adf4dd431045a8e446e79563139, type: 3}
+  doorSound: {fileID: 0}
+  hurtClips: []
 --- !u!114 &727386079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36080,7 +36084,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.4
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -41261,8 +41265,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835053002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: 2.13, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.23, y: 1.7, z: 0}
+  m_LocalScale: {x: 0.7562814, y: 0.7562814, z: 0.7562814}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

@@ -18,6 +18,13 @@ public class HealthHandler : MonoBehaviour {
 		if(invulnerableTimer > 0f) {
 			invulnerableTimer -= Time.deltaTime;
 		}
+
+		if(currentHealth <= 0) {
+			if(GetComponent<Rigidbody2D>() != null) {
+				GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+				GetComponent<Rigidbody2D>().angularVelocity = 0f;
+			}
+		}
 	}
 
 	[System.NonSerialized]
