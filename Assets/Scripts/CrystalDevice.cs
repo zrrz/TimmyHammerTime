@@ -32,6 +32,7 @@ public class CrystalDevice : MonoBehaviour {
 			audioSource.clip = breakSound;
 			audioSource.Play();
 		}
-		Destroy(gameObject);
+		if(GetComponent<SimpleEnemy>() == null)
+			Destroy(gameObject);
 	}
 }
